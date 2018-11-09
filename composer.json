@@ -1,29 +1,36 @@
 {
-    "name": "hachi-zzq/laravel-muti-tenancy",
-    "description": "Package description here.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "朱正钱",
-            "email": "hachi.zzq@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "7.*",
-        "laravel/framework": "^5.6"
+  "name": "hachi-zzq/laravel-muti-tenancy",
+  "description": "Package description here.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "朱正钱",
+      "email": "hachi.zzq@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "7.*",
+    "laravel/framework": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Hachi\\LaravelMutiTenancy\\": "src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
     },
-    "autoload": {
-        "psr-4": {
-            "Hachi\\LaravelMutiTenancy\\": "src"
-        }
-    },
-    "repositories": [
-      {
-        "type": "composer",
-        "url": "https://packagist.phpcomposer.com"
-      },
-      {
-        "packagist": false
-      }
-    ]
+    {
+      "packagist": false
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Hachi\\LaravelMutiTenancy\\Providers\\TenancyProvider"
+      ]
+    }
+  }
 }
