@@ -12,12 +12,10 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Database\Console\Migrations;
+namespace Hachi\LaravelMutiTenancy\Exceptions;
 
-use Hyn\Tenancy\Traits\MutatesMigrationCommands;
-use Illuminate\Database\Console\Migrations\RollbackCommand as BaseCommand;
+use Illuminate\Validation\ValidationException;
 
-class RollbackCommand extends BaseCommand
+class ModelValidationException extends ValidationException
 {
-    use MutatesMigrationCommands;
 }

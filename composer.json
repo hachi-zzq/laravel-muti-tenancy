@@ -25,12 +25,5 @@
     {
       "packagist": false
     }
-  ],
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Hachi\\LaravelMutiTenancy\\Providers\\TenancyProvider"
-      ]
-    }
-  }
+  ]
 }

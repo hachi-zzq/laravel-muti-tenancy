@@ -12,12 +12,8 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Database\Console\Migrations;
+namespace Hachi\LaravelMutiTenancy\Exceptions;
 
-use Hyn\Tenancy\Traits\MutatesMigrationCommands;
-use Illuminate\Database\Console\Migrations\ResetCommand as BaseCommand;
-
-class ResetCommand extends BaseCommand
+class GeneratorInvalidException extends \Exception
 {
-    use MutatesMigrationCommands;
 }

@@ -14,11 +14,10 @@
 
 namespace Hachi\LaravelMutiTenancy\Abstracts;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Hachi\LaravelMutiTenancy\Traits\UsesSystemConnection;
 
-class SystemModel extends Model
+abstract class SystemModel extends AbstractModel
 {
     use UsesSystemConnection;
 }

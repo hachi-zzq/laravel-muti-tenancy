@@ -14,7 +14,6 @@
 
 namespace Hachi\LaravelMutiTenancy\Providers;
 
-use Hachi\LaravelMutiTenancy\Environment;
 use Hachi\LaravelMutiTenancy\Contracts;
 use Hachi\LaravelMutiTenancy\Repositories;
 use Illuminate\Support\ServiceProvider;
@@ -44,8 +43,7 @@ class TenancyProvider extends ServiceProvider
     {
 
     }
-//
-//
+
 //    public function provides()
 //    {
 //        return [Environment::class];

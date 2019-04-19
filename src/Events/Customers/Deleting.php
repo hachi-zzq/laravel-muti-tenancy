@@ -12,9 +12,9 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Events\Customers;
+namespace Hachi\LaravelMutiTenancy\Events\Customers;
 
-use Hyn\Tenancy\Abstracts\CustomerEvent;
+use Hachi\LaravelMutiTenancy\Abstracts\CustomerEvent;
 
 class Deleting extends CustomerEvent
 {

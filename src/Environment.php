@@ -61,7 +61,7 @@ class Environment
             return $hostname;
         }
 
-        //if containter has hostname ,then return
+        //if containter has hostname, then return
         if($this->app->has(CurrentHostname::class) && $this->app->get(CurrentHostname::class)){
             return $this->app->get(CurrentHostname::class);
         }

@@ -79,55 +79,6 @@ return [
         'cache' => 10,
     ],
 
-    'hostname' => [
-        /**
-         * If you want the multi tenant application to fall back to a default
-         * hostname/website in case the requested hostname was not found
-         * in the database, complete in detail the default hostname.
-         *
-         * @warn this must be a FQDN, these have no protocol or path!
-         */
-        'default' => env('TENANCY_DEFAULT_HOSTNAME'),
-        /**
-         * The package is able to identify the requested hostname by itself,
-         * disable to get full control (and responsibility) over hostname
-         * identification. The hostname identification is needed to
-         * set a specific website as currently active.
-         *
-         * @see src/Jobs/HostnameIdentification.php
-         */
-        'auto-identification' => env('TENANCY_AUTO_HOSTNAME_IDENTIFICATION', true),
-
-        /**
-         * In case you want to have the tenancy environment set up early,
-         * enable this flag. This will run the tenant identification
-         * inside a middleware. This will eager load tenancy.
-         *
-         * A good use case is when you have set "tenant" as the default
-         * database connection.
-         */
-        'early-identification' => env('TENANCY_EARLY_IDENTIFICATION', false),
-
-        /**
-         * Abort application execution in case no hostname was identified. This will throw a
-         * 404 not found in case the tenant hostname was not resolved.
-         */
-        'abort-without-identified-hostname' => true,
-
-        /**
-         * Time to cache hostnames in minutes. Set to false to disable.
-         */
-        'cache' => 10,
-
-        /**
-         * Automatically update the app.url configured inside Laravel to match
-         * the tenant FQDN whenever a hostname/tenant was identified.
-         *
-         * This will resolve issues with password reset mails etc using the
-         * correct domain.
-         */
-        'update-app-url' => false,
-    ],
     'folders' => [
         'config' => [
             /**

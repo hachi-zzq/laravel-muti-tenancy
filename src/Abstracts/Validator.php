@@ -14,8 +14,8 @@
 
 namespace Hachi\LaravelMutiTenancy\Abstracts;
 
-use Hyn\Tenancy\Database\Connection;
-use Hyn\Tenancy\Exceptions\ModelValidationException;
+use Hachi\LaravelMutiTenancy\Database\Connection;
+use Hachi\LaravelMutiTenancy\Exceptions\ModelValidationException;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\Validator as Native;
 

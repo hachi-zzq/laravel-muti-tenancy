@@ -17,8 +17,8 @@ namespace Hachi\LaravelMutiTenancy\Repositories;
 use Hachi\LaravelMutiTenancy\Contracts\Repositories\WebsiteRepository as Contract;
 use Hachi\LaravelMutiTenancy\Contracts\Website;
 use Hyn\Tenancy\Events\Websites as Events;
-use Hyn\Tenancy\Traits\DispatchesEvents;
-use Hyn\Tenancy\Validators\WebsiteValidator;
+use Hachi\LaravelMutiTenancy\Traits\DispatchesEvents;
+use Hachi\LaravelMutiTenancy\Validators\WebsiteValidator;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Database\Eloquent\Builder;
 

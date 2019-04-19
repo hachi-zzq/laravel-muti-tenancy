@@ -12,12 +12,8 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Database\Console\Seeds;
+namespace Hachi\LaravelMutiTenancy\Exceptions;
 
-use Hyn\Tenancy\Traits\MutatesSeedCommands;
-use Illuminate\Database\Console\Seeds\SeedCommand as BaseCommand;
-
-class SeedCommand extends BaseCommand
+class GeneratorFailedException extends \Exception
 {
-    use MutatesSeedCommands;
 }

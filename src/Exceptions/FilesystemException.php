@@ -12,10 +12,8 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hachi\LaravelMutiTenancy\Events\Customers;
+namespace Hachi\LaravelMutiTenancy\Exceptions;
 
-use Hachi\LaravelMutiTenancy\Abstracts\CustomerEvent;
-
-class Creating extends CustomerEvent
+class FilesystemException extends \Exception
 {
 }

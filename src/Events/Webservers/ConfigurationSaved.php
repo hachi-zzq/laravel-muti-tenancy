@@ -12,7 +12,7 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Events\Webservers;
+namespace Hachi\LaravelMutiTenancy\Events\Webservers;
 
 use Hyn\Tenancy\Abstracts\WebserverEvent;
 

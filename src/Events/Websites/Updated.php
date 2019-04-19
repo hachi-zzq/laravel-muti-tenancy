@@ -12,10 +12,10 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Events\Websites;
+namespace Hachi\LaravelMutiTenancy\Events\Websites;
 
-use Hyn\Tenancy\Abstracts\WebsiteEvent;
-use Hyn\Tenancy\Contracts\Website;
+use Hachi\LaravelMutiTenancy\Contracts\Website;
+use Hachi\LaravelMutiTenancy\Abstracts\WebsiteEvent;
 
 class Updated extends WebsiteEvent
 {
