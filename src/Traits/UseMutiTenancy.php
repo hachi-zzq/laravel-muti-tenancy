@@ -35,10 +35,7 @@ trait UseMutiTenancy
 
         $website = app(Environment::class)->website();
 
-        if($website && $this->isFillable($field)){
-
-            $attributes[$field] = $website->id;
-        }
+        $attributes[$field] = $website ? $website->id : 0;
 
         return parent::newInstance($attributes,$exists);
     }

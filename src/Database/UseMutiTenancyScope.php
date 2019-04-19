@@ -28,9 +28,7 @@ class UseMutiTenancyScope implements Scope
         $field = config()->get('tenancy.website.filter-field-name', 'tenancy_id');
 
         $website = app(Environment::class)->website();
-        
-        if ($website) {
-            $builder->where($field, $website->id);
-        }
+
+        $builder->where($field, $website ? $website->id : 0);
     }
 }
