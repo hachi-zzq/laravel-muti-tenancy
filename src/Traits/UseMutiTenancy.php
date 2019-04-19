@@ -34,7 +34,7 @@ trait UseMutiTenancy
         $field = config()->get('tenancy.website.filter-field-name', 'tenancy_id');
 
         $website = app(Environment::class)->website();
-
+        
         $attributes[$field] = $website ? $website->id : 0;
 
         return parent::newInstance($attributes,$exists);

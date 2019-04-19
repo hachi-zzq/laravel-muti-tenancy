@@ -29,6 +29,6 @@ class UseMutiTenancyScope implements Scope
 
         $website = app(Environment::class)->website();
 
-        $builder->where($field, $website ? $website->id : 0);
+        $builder->where($model->qualifyColumn($field), $website ? $website->id : 0);
     }
 }
