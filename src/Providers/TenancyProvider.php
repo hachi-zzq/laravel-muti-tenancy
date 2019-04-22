@@ -56,8 +56,6 @@ class TenancyProvider extends ServiceProvider
         $this->app->bind(CustomerContract::class, $config['customer']);
         $this->app->bind(HostnameContract::class, $config['hostname']);
         $this->app->bind(WebsiteContract::class, $config['website']);
-
-//        forward_static_call([$config['hostname'], 'observe'], FlushHostnameCache::class);
     }
 
     protected function registerRepositories()
@@ -78,16 +76,8 @@ class TenancyProvider extends ServiceProvider
 
     protected function registerProviders()
     {
-//        $this->app->register(Providers\ConfigurationProvider::class);
-//        $this->app->register(Providers\PasswordProvider::class);
-//        $this->app->register(Providers\ConnectionProvider::class);
-//        $this->app->register(Providers\UuidProvider::class);
-//        $this->app->register(Providers\BusProvider::class);
-//        $this->app->register(Providers\FilesystemProvider::class);
-        $this->app->register(Providers\HostnameProvider::class);
-//
-//        // Register last.
-//        $this->app->register(Providers\EventProvider::class);
+
+        $this->app->register(Providers\HostnameProvider::class);//
     }
 
 }

@@ -16,7 +16,7 @@ namespace Hachi\LaravelMutiTenancy\Repositories;
 
 use Hachi\LaravelMutiTenancy\Contracts\Customer;
 use Hachi\LaravelMutiTenancy\Contracts\Repositories\CustomerRepository as Contract;
-use Hyn\Tenancy\Traits\DispatchesEvents;
+use Hachi\LaravelMutiTenancy\Traits\DispatchesEvents;
 use Illuminate\Database\Eloquent\Builder;
 
 class CustomerRepository implements Contract

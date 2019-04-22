@@ -12,10 +12,8 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Events\Database;
+namespace Hachi\LaravelMutiTenancy\Contracts\Bus;
 
-use Hyn\Tenancy\Abstracts\DatabaseEvent;
-
-class Deleting extends DatabaseEvent
+interface Dispatcher extends \Illuminate\Contracts\Bus\Dispatcher
 {
 }

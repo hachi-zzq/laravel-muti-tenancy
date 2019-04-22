@@ -14,8 +14,8 @@
 
 namespace Hachi\LaravelMutiTenancy\Abstracts;
 
-use Hyn\Tenancy\Events\Hostnames\Identified;
-use Hyn\Tenancy\Events\Hostnames\Switched;
+use Hachi\LaravelMutiTenancy\Events\Hostnames\Identified;
+use Hachi\LaravelMutiTenancy\Events\hostnames\Switched;
 use Hyn\Tenancy\Website\Directory;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;

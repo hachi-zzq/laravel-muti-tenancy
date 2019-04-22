@@ -14,7 +14,7 @@
 
 namespace Hachi\LaravelMutiTenancy\Providers\Tenants;
 
-use Hyn\Tenancy\Contracts\Bus\Dispatcher as DispatcherContract;
+use Hachi\LaravelMutiTenancy\Contracts\Bus\Dispatcher as DispatcherContract;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 

@@ -12,9 +12,9 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-namespace Hyn\Tenancy\Events\Filesystem;
+namespace Hachi\LaravelMutiTenancy\Events\Filesystem;
 
-use Hyn\Tenancy\Abstracts\FilesystemEvent;
+use Hachi\LaravelMutiTenancy\Abstracts\FilesystemEvent;
 
 class DirectoryCreated extends FilesystemEvent
 {
