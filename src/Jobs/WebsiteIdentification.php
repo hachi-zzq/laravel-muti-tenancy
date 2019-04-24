@@ -9,7 +9,6 @@ namespace Hachi\LaravelMutiTenancy\Jobs;
 
 use Hachi\LaravelMutiTenancy\Contracts\Repositories\WebsiteRepository;
 use Hachi\LaravelMutiTenancy\Helper;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class WebsiteIdentification
@@ -19,7 +18,7 @@ class WebsiteIdentification
      * @param WebsiteRepository $websiteRepository
      * @return null
      */
-    public function handle(Request $request, WebsiteRepository $websiteRepository)
+    public function handle(WebsiteRepository $websiteRepository)
     {
         $gk = Helper::getRequestGk();
 

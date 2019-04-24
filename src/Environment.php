@@ -25,6 +25,8 @@ class Environment
 
     protected $websiteRepository;
 
+    protected $ignoreWebsite = false;
+
     /**
      * Environment constructor.
      * @param Application $app
@@ -35,6 +37,12 @@ class Environment
         $this->websiteRepository = $websiteRepository;
     }
 
+    public function ignoreWebsite($ignore = true)
+    {
+        $this->app->singleton(IgnoreWebsite::class, function () use ($ignore){
+            return new IgnoreWebsite();
+        });
+    }
 
     public function identifyWebsite()
     {
@@ -50,7 +58,6 @@ class Environment
             $this->app->singleton(CurrentWebsite::class, function () use ($website) {
                 return $website;
             });
-
 
             return $website;
         }
