@@ -40,7 +40,7 @@ class Environment
     public function ignoreWebsite($ignore = true)
     {
         $this->app->singleton(IgnoreWebsite::class, function () use ($ignore){
-            return new IgnoreWebsite();
+            return new IgnoreWebsite($ignore);
         });
     }
 
@@ -54,7 +54,6 @@ class Environment
     public function website(Website $website = null)
     {
         if ($website !== null) {
-
             $this->app->singleton(CurrentWebsite::class, function () use ($website) {
                 return $website;
             });

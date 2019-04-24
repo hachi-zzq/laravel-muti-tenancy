@@ -9,7 +9,7 @@ class IgnoreWebsite
 {
     private $ignoreIgnoreWebsite = false;
 
-    public function __construct($ignore = true)
+    public function __construct($ignore = false)
     {
         $this->ignoreIgnoreWebsite = $ignore;
     }
