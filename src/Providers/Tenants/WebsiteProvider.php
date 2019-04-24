@@ -14,18 +14,18 @@
 
 namespace Hachi\LaravelMutiTenancy\Providers\Tenants;
 
-use Hachi\LaravelMutiTenancy\Contracts\CurrentHostname;
+use Hachi\LaravelMutiTenancy\Contracts\CurrentWebsite;
 use Hachi\LaravelMutiTenancy\Environment;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
-class HostnameProvider extends ServiceProvider
+class WebsiteProvider extends ServiceProvider
 {
     public $defer = true;
 
     public function provides()
     {
-        return [CurrentHostname::class];
+        return [CurrentWebsite::class];
     }
 
     public function boot(Application $app)

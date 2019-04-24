@@ -15,12 +15,15 @@
   "autoload": {
     "psr-4": {
       "Hachi\\LaravelMutiTenancy\\": "src/"
-    }
+    },
+    "files": [
+      "src/helper.php"
+    ]
   },
   "repositories": [
     {
       "type": "composer",
-      "url": "https://packagist.phpcomposer.com"
+      "url": "https://packagist.laravel-china.org"
     },
     {
       "packagist": false

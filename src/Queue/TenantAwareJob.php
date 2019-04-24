@@ -14,17 +14,13 @@
 
 namespace Hachi\LaravelMutiTenancy\Queue;
 
-use Hachi\LaravelMutiTenancy\Contracts\Hostname;
-use Hachi\LaravelMutiTenancy\Contracts\Repositories\HostnameRepository;
+use Hachi\LaravelMutiTenancy\Contracts\Repositories\WebsiteRepository;
 use Hachi\LaravelMutiTenancy\Environment;
 use Illuminate\Queue\SerializesModels;
 
 trait TenantAwareJob
 {
-    /**
-     * @var int The hostname ID of the previously active tenant.
-     */
-    protected $hostname_id;
+    protected $websiteId;
 
     use SerializesModels {
         __sleep as serializedSleep;
@@ -36,10 +32,10 @@ trait TenantAwareJob
         /** @var Environment $environment */
         $environment = app(Environment::class);
 
-        $hostname = $environment->hostname();
+        $website = $environment->website();
 
-        if ($hostname && !$this->hostname_id) {
-            $this->hostname_id = $hostname->id;
+        if ($website && !$this->websiteId) {
+            $this->websiteId = $website->id;
         }
 
         $attributes = $this->serializedSleep();
@@ -49,30 +45,18 @@ trait TenantAwareJob
 
     public function __wakeup()
     {
-        if (isset($this->hostname_id)) {
+        if (isset($this->websiteId)) {
 
             /** @var Environment $environment */
             $environment = app(Environment::class);
 
-            $hostname = app(HostnameRepository::class)->query()->where('id',$this->hostname_id)->first();
-            if($hostname){
-                $environment->hostname($hostname);
+            $website = app(WebsiteRepository::class)->query()->where('id',$this->websiteId)->first();
+            if($website){
+                $environment->website($website);
             }
         }
 
         $this->serializedWakeup();
     }
 
-    /**
-     * Manually override the hostname to be used.
-     *
-     * @param Hostname|int $hostname
-     * @return $this
-     */
-    public function onHostname($hostname)
-    {
-        $this->hostname_id = $hostname instanceof Hostname ? $hostname->id : $hostname;
-
-        return $this;
-    }
 }

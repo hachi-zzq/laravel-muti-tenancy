@@ -8,7 +8,6 @@
 
 namespace Hachi\LaravelMutiTenancy\Database;
 
-use Hachi\LaravelMutiTenancy\Contracts\CurrentHostname;
 use Hachi\LaravelMutiTenancy\Environment;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Scope;
@@ -25,7 +24,7 @@ class UseMutiTenancyScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $field = config()->get('tenancy.website.filter-field-name', 'tenancy_id');
+        $field = config()->get('tenancy.website.filter-field-name', 'website_id');
 
         $website = app(Environment::class)->website();
 

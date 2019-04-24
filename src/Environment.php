@@ -1,101 +1,78 @@
 <?php namespace Hachi\LaravelMutiTenancy;
 
-use Hachi\LaravelMutiTenancy\Contracts\CurrentHostname;
-use Hachi\LaravelMutiTenancy\Contracts\Hostname;
-use Hachi\LaravelMutiTenancy\Events\hostnames\Switched;
-use Hachi\LaravelMutiTenancy\Jobs\HostnameIdentification;
+use Hachi\LaravelMutiTenancy\Contracts\CurrentWebsite;
+use Hachi\LaravelMutiTenancy\Contracts\Repositories\WebsiteRepository;
+use Hachi\LaravelMutiTenancy\Contracts\Website;
+use Hachi\LaravelMutiTenancy\Jobs\WebsiteIdentification;
 use Hachi\LaravelMutiTenancy\Traits\DispatchesEvents;
 use Hachi\LaravelMutiTenancy\Traits\DispatchesJobs;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 /**
  * Created by PhpStorm.
  * DateTime: 2018/11/5 15:37
  * @author: hachi.zzq <hachi.zzq@gmail.com>
  */
-
 class Environment
 {
-    use DispatchesJobs,DispatchesEvents;
+    use DispatchesJobs, DispatchesEvents;
 
     /**
      * @var Application
      */
     protected $app;
 
+    protected $websiteRepository;
+
     /**
      * Environment constructor.
      * @param Application $app
      */
-    public function __construct(Application $app)
+    public function __construct(Application $app, WebsiteRepository $websiteRepository)
     {
         $this->app = $app;
+        $this->websiteRepository = $websiteRepository;
     }
 
-    /**
-     * 查询具体的 hostname;
-     */
-    public function identifyHostname()
+
+    public function identifyWebsite()
     {
-        $this->app->singleton(CurrentHostname::class, function () {
-            $hostname = $this->dispatch(new HostnameIdentification());
-            return $hostname;
+        $this->app->singleton(CurrentWebsite::class, function () {
+            return $this->dispatch(new WebsiteIdentification());
         });
     }
 
-    /**
-     * Get or set the current hostname.
-     *
-     * @param Hostname|null $hostname
-     * @return Hostname|null
-     */
-    public function hostname(Hostname $hostname = null)
+    public function website(Website $website = null)
     {
-        if ($hostname !== null) {
-            //if bind hostname ,then return auto
-            $this->app->singleton(CurrentHostname::class, function () use ($hostname) {
-                return $hostname;
+        if ($website !== null) {
+
+            $this->app->singleton(CurrentWebsite::class, function () use ($website) {
+                return $website;
             });
-            
-            $this->emitEvent(new Switched($hostname));
 
-            return $hostname;
+
+            return $website;
         }
 
-        //if containter has hostname, then return
-        if($this->app->has(CurrentHostname::class) && $this->app->get(CurrentHostname::class)){
-            return $this->app->get(CurrentHostname::class);
+        if ($this->app->has(CurrentWebsite::class) && $this->app->get(CurrentWebsite::class)) {
+            return $this->app->get(CurrentWebsite::class);
         }
 
-        //else from request query hostname
-        $this->identifyHostname();
+        $this->identifyWebsite();
 
-        return $this->app->make(CurrentHostname::class);
+        return $this->app->make(CurrentWebsite::class);
     }
 
-    /**
-     * @return Website|bool
-     */
-    public function website()
+
+    public function switchWebsiteByGk($gk)
     {
-        /**
-         * @var Hostname $hostname
-         */
-        $hostname = $this->hostname();
+        $website = $this->websiteRepository->findByGk($gk);
 
-        return $hostname ? $hostname->website : null;
+        if (!$website) {
+            throw new ModelNotFoundException(sprintf("gk: %s website not found", $gk));
+        }
+
+        return $this->website($website);
     }
-
-    /**
-     * @return Customer|null
-     */
-    public function customer()
-    {
-        /**
-         * @var Hostname $hostname
-         */
-        $hostname = $this->hostname();
-
-        return $hostname ? $hostname->customer : null;
-    }
-
 }

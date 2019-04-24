@@ -19,8 +19,6 @@ use Hachi\LaravelMutiTenancy\Repositories;
 use Illuminate\Support\ServiceProvider;
 use Hachi\LaravelMutiTenancy\Providers\Tenants as Providers;
 use Hachi\LaravelMutiTenancy\Contracts\Website as WebsiteContract;
-use Hachi\LaravelMutiTenancy\Contracts\Customer as CustomerContract;
-use Hachi\LaravelMutiTenancy\Contracts\Hostname as HostnameContract;
 
 class TenancyProvider extends ServiceProvider
 {
@@ -39,45 +37,24 @@ class TenancyProvider extends ServiceProvider
     }
 
 
-    public function boot()
-    {
-
-    }
-
-//    public function provides()
-//    {
-//        return [Environment::class];
-//    }
-
     protected function registerModels()
     {
         $config = $this->app['config']['tenancy.models'];
-
-        $this->app->bind(CustomerContract::class, $config['customer']);
-        $this->app->bind(HostnameContract::class, $config['hostname']);
         $this->app->bind(WebsiteContract::class, $config['website']);
     }
 
     protected function registerRepositories()
     {
         $this->app->singleton(
-            Contracts\Repositories\HostnameRepository::class,
-            Repositories\HostnameRepository::class
-        );
-        $this->app->singleton(
             Contracts\Repositories\WebsiteRepository::class,
             Repositories\WebsiteRepository::class
-        );
-        $this->app->singleton(
-            Contracts\Repositories\CustomerRepository::class,
-            Repositories\CustomerRepository::class
         );
     }
 
     protected function registerProviders()
     {
-
-        $this->app->register(Providers\HostnameProvider::class);//
+        $this->app->register(Providers\WebsiteProvider::class);
+        $this->app->register(Providers\BusProvider::class);
     }
 
 }

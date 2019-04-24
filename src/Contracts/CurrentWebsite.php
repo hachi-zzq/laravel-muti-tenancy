@@ -7,8 +7,7 @@
 
 namespace Hachi\LaravelMutiTenancy\Contracts;
 
-
-interface CurrentHostname extends Hostname
+interface CurrentWebsite extends Website
 {
 
 }

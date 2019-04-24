@@ -16,11 +16,15 @@ namespace Hachi\LaravelMutiTenancy\Repositories;
 
 use Hachi\LaravelMutiTenancy\Contracts\Repositories\WebsiteRepository as Contract;
 use Hachi\LaravelMutiTenancy\Contracts\Website;
-use Hyn\Tenancy\Events\Websites as Events;
 use Hachi\LaravelMutiTenancy\Traits\DispatchesEvents;
-use Hachi\LaravelMutiTenancy\Validators\WebsiteValidator;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Database\Eloquent\Builder;
+use Hachi\LaravelMutiTenancy\Events\Websites\Creating;
+use Hachi\LaravelMutiTenancy\Events\Websites\Created;
+use Hachi\LaravelMutiTenancy\Events\Websites\Updated;
+use Hachi\LaravelMutiTenancy\Events\Websites\Updating;
+use Hachi\LaravelMutiTenancy\Events\Websites\Deleted;
+use Hachi\LaravelMutiTenancy\Events\Websites\Deleting;
 
 class WebsiteRepository implements Contract
 {
@@ -30,10 +34,6 @@ class WebsiteRepository implements Contract
      */
     protected $website;
     /**
-     * @var WebsiteValidator
-     */
-    protected $validator;
-    /**
      * @var Factory
      */
     protected $cache;
@@ -41,25 +41,12 @@ class WebsiteRepository implements Contract
     /**
      * WebsiteRepository constructor.
      * @param Website $website
-     * @param WebsiteValidator $validator
      * @param Factory $cache
      */
-    public function __construct(Website $website, WebsiteValidator $validator, Factory $cache)
+    public function __construct(Website $website, Factory $cache)
     {
         $this->website = $website;
-        $this->validator = $validator;
         $this->cache = $cache;
-    }
-
-    /**
-     * @param string $uuid
-     * @return Website|null
-     */
-    public function findByUuid(string $uuid)
-    {
-        return $this->cache->remember("tenancy.website.$uuid", config('tenancy.website.cache'), function () use ($uuid) {
-            return $this->query()->where('uuid', $uuid)->first();
-        });
     }
 
     /**
@@ -82,17 +69,15 @@ class WebsiteRepository implements Contract
         }
 
         $this->emitEvent(
-            new Events\Creating($website)
+            new Creating($website)
         );
-
-        $this->validator->save($website);
 
         $website->save();
 
-        $this->cache->forget("tenancy.website.{$website->uuid}");
+        $this->cache->forget("tenancy.website.{$website->id}");
 
         $this->emitEvent(
-            new Events\Created($website)
+            new Created($website)
         );
 
         return $website;
@@ -109,10 +94,8 @@ class WebsiteRepository implements Contract
         }
 
         $this->emitEvent(
-            new Events\Updating($website)
+            new Updating($website)
         );
-
-        $this->validator->save($website);
 
         $dirty = collect(array_keys($website->getDirty()))->mapWithKeys(function ($value, $key) use ($website) {
             return [ $value => $website->getOriginal($value) ];
@@ -120,14 +103,14 @@ class WebsiteRepository implements Contract
 
         $website->save();
 
-        $this->cache->forget("tenancy.website.{$website->uuid}");
+        $this->cache->forget("tenancy.website.{$website->id}");
 
-        if ($dirty->has('uuid')) {
-            $this->cache->forget("tenancy.website.{$dirty->get('uuid')}");
+        if ($dirty->has('id')) {
+            $this->cache->forget("tenancy.website.{$dirty->get('id')}");
         }
 
         $this->emitEvent(
-            new Events\Updated($website, $dirty->toArray())
+            new Updated($website, $dirty->toArray())
         );
 
         return $website;
@@ -141,17 +124,15 @@ class WebsiteRepository implements Contract
     public function delete(Website &$website, $hard = false): Website
     {
         $this->emitEvent(
-            new Events\Deleting($website)
+            new Deleting($website)
         );
-
-        $this->validator->delete($website);
 
         $hard ? $website->forceDelete() : $website->delete();
 
-        $this->cache->forget("tenancy.website.{$website->uuid}");
+        $this->cache->forget("tenancy.website.{$website->id}");
 
         $this->emitEvent(
-            new Events\Deleted($website)
+            new Deleted($website)
         );
 
         return $website;
@@ -164,5 +145,10 @@ class WebsiteRepository implements Contract
     public function query(): Builder
     {
         return $this->website->newQuery();
+    }
+
+    public function findByGk($gk)
+    {
+        return $this->query()->where('global_key', $gk)->first();
     }
 }

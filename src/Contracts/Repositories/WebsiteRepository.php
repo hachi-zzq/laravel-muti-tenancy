@@ -20,26 +20,23 @@ use Illuminate\Database\Eloquent\Builder;
 interface WebsiteRepository
 {
     /**
-     * @param string $uuid
-     * @return Website|null
-     */
-    public function findByUuid(string $uuid);
-
-    /**
      * @param string $id
      * @return Website|null
      */
     public function findById(string $id);
+
     /**
      * @param Website $website
      * @return Website
      */
     public function create(Website &$website): Website;
+
     /**
      * @param Website $website
      * @return Website
      */
     public function update(Website &$website): Website;
+
     /**
      * @param Website $website
      * @param bool $hard
@@ -52,4 +49,6 @@ interface WebsiteRepository
      * @return Builder
      */
     public function query(): Builder;
+
+    public function findByGk($gk);
 }
