@@ -32,13 +32,5 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Website extends SystemModel implements WebsiteContract
 {
-    public function customer(): BelongsTo
-    {
-        return $this->belongsTo(config('tenancy.models.customer'));
-    }
 
-    public function hostnames(): HasMany
-    {
-        return $this->hasMany(config('tenancy.models.hostname'));
-    }
 }

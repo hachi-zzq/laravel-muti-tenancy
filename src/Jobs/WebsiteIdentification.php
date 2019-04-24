@@ -27,12 +27,6 @@ class WebsiteIdentification
             return null;
         }
 
-        $website = $websiteRepository->findByGk($gk);
-
-        if (!$website) {
-            throw new ModelNotFoundException(sprintf("gk: %s website not found", $gk));
-        }
-
-        return $website;
+        return $websiteRepository->findByGk($gk);
     }
 }

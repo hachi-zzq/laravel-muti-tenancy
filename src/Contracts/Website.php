@@ -11,7 +11,5 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 interface Website
 {
-    public function customer(): BelongsTo;
 
-    public function hostnames(): HasMany;
 }
