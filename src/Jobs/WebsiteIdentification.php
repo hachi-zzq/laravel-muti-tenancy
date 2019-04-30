@@ -8,7 +8,7 @@
 namespace Hachi\LaravelMutiTenancy\Jobs;
 
 use Hachi\LaravelMutiTenancy\Contracts\Repositories\WebsiteRepository;
-use Hachi\LaravelMutiTenancy\Helper;
+use Hachi\LaravelMutiTenancy\helperb;
 use Illuminate\Http\Request;
 
 class WebsiteIdentification
@@ -20,7 +20,7 @@ class WebsiteIdentification
      */
     public function handle(WebsiteRepository $websiteRepository)
     {
-        $gk = Helper::getRequestGk();
+        $gk = helperb::getRequestGk();
 
         if (!$gk) {
             return null;
