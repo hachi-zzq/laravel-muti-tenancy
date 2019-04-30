@@ -25,7 +25,7 @@ class TenancyProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config.php',
+            realpath(__DIR__ . '/../config.php'),
             'tenancy'
         );
 

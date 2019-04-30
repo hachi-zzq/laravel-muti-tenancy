@@ -10,8 +10,8 @@ return [
         'website' => \Hachi\LaravelMutiTenancy\Models\Website::class
     ],
     'website' => [
-        'root-domain'       => 'codingtest.com',
-        'filter-field-name' => 'tenancy_id',
+        'root-domain'       => env("APP_DOMAIN", 'codingtest.com'),
+        'filter-field-name' => env("TENANCY_FILTER_FIELD", 'website_id'),
     ],
     'db'      => [
         /**
