@@ -1,5 +1,5 @@
 <?php namespace Hachi\LaravelMutiTenancy;
-class helperb{
+class helper{
 
     public static function getRequestGk()
     {
