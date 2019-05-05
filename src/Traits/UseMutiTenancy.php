@@ -32,10 +32,10 @@ trait UseMutiTenancy
     public function newInstance($attributes = [], $exists = false)
     {
         $field = config()->get('tenancy.website.filter-field-name', 'tenancy_id');
-
-        $website = app(Environment::class)->website();
-        
-        $attributes[$field] = $website ? $website->id : 0;
+        if(!isset($attributes[$field])){
+            $website = app(Environment::class)->website();
+            $attributes[$field] = $website ? $website->id : 0;
+        }
 
         return parent::newInstance($attributes,$exists);
     }
