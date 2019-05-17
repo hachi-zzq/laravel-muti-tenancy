@@ -24,11 +24,6 @@ class TenancyProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config.php',
-            'tenancy'
-        );
-
         $this->registerModels();
 
         $this->registerRepositories();
